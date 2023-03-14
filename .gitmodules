@@ -1,0 +1,9 @@
+[submodule "sensi-web-api"]
+	path = sensi-web-api
+	url = https://github.com/sensiflow/sensi-web-api.git
+[submodule "sensi-web"]
+	path = sensi-web
+	url = https://github.com/sensiflow/sensi-web.git
+[submodule "image-processor"]
+	path = image-processor
+	url = https://github.com/sensiflow/image-processor

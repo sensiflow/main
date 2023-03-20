@@ -1,11 +1,8 @@
 ## GET `/devices`
 
-Returns a list of all devices with pagination support.
-### Query Parameters
-| Parameter | Type   | Description                                 |
-|-----------|--------|---------------------------------------------|
-| page      | number | The page number of the results to retrieve. |
-| size      | number | The number of results per page to retrieve. |
+Returns a list of devices.
+
+Supports [**Pagination**](/api/reference#pagination)
 
 ### Response
 

@@ -30,21 +30,24 @@ Requests that return multiple items will be paginated to **20** items by default
 The response for a paginated request always follows the same `page` structure:
 
 ```json
+
+Example GET /devices?page=1&size=2
+
 {
   "totalPages": 2,  
   "totalElements": 10,
   "items": [
     {
       "id": 1,
-      "name": "Device 1",
-      "description": "This is device 1",
+      "name": "Cafeteria Device",
+      "description": "This device is located in second floor of the cafeteria",
       "stream": "rtsp://my-stream:5412/1",
       "status": "ONLINE",
     },
     {
       "id": 2,
-      "name": "Device 2",
-      "description": "This is device 2",
+      "name": "Entrance Device",
+      "description": "This device is located at the entrance of the building",
       "stream": "rtsp://my-stream:5412/2",
       "status": "OFFLINE",
     }

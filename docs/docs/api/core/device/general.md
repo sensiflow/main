@@ -2,7 +2,7 @@
 
 Returns a list of devices.
 
-Supports [**Pagination**](/api/reference#pagination)
+Supports [**Pagination**](/api/reference#pagination) and [**Expansion**](/api/reference#expanding-responses)
 
 ### Response
 
@@ -38,6 +38,8 @@ Content-Type: application/json
 ## Get `/devices/{id}`
 
 Returns a device with a given ID.
+
+Supports [**Expansion**](/api/reference#expanding-responses)
 
 ### Response
 

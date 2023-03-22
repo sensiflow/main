@@ -23,7 +23,7 @@ Requests that return multiple items will be paginated to **20** items by default
 | Parameter | Type | Description | Default | max |
 |-----------|------|-------------| ------- | --- |
 | page | number | The page number to retrieve. | 1 | ------ |
-| size | number | The number of items to retrieve. | 10 | 50 |
+| size | number | The number of items to retrieve. | 20 | 50 |
 
 ### Page
 
@@ -36,6 +36,8 @@ Example GET /devices?page=1&size=2
 {
   "totalPages": 2,  
   "totalElements": 10,
+  "isLast": false,
+  "isFirst": true,
   "items": [
     {
       "id": 1,
@@ -43,6 +45,7 @@ Example GET /devices?page=1&size=2
       "description": "This device is located in second floor of the cafeteria",
       "stream": "rtsp://my-stream:5412/1",
       "status": "ONLINE",
+      "user": 1
     },
     {
       "id": 2,
@@ -50,12 +53,58 @@ Example GET /devices?page=1&size=2
       "description": "This device is located at the entrance of the building",
       "stream": "rtsp://my-stream:5412/2",
       "status": "OFFLINE",
+      "user": 1
     }
   ]
 }
 ```
 
+## Expanding Responses
+
+Many objects allow you to request additional information as an expanded response by using the `expand` request parameter.
+
+| Parameter | Type | Description | Required | Default |
+|-----------|------|-------------| -------- | ------- |
+| expand | boolean | Expand the response to include additional information. | No | false |
+
+### Exampel
+  
+```json
+
+Example GET /devices/1
+
+{
+  "id": 1,
+  "name": "Cafeteria Device",
+  "description": "This device is located in second floor of the cafeteria",
+  "stream": "rtsp://my-stream:5412/1",
+  "status": "ONLINE",
+  "user": 1
+}
+
+Example GET /devices/1?expand=true
+
+{
+  "id": 1,
+  "name": "Cafeteria Device",
+  "description": "This device is located in second floor of the cafeteria",
+  "stream": "rtsp://my-stream:5412/1",
+  "status": "ONLINE",
+  "user": {
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+  }
+}
+
+```
+
+
+
+
+
 
 ## Camera Stream Support
 
 Currently, SensiFlow supports only _RTSP_ streams. We are working on adding support for _RTMP_ and _HLS_ streams.
+

@@ -67,11 +67,15 @@ Many objects allow you to request additional information as an expanded response
 |-----------|------|-------------| -------- | ------- |
 | expand | boolean | Expand the response to include additional information. | No | false |
 
+This allows you to request additional information about the object in the response, without having to make additional requests.
+
 ### Example
+
+In the following example, we are requesting the device with id 1. We are not specifying the `expand` parameter, so the response will only include the entity id for the user. If we specify `expand=true`, the response will include the full user entity.
   
 ```json
 
-Example GET /devices/1
+GET /devices/1
 
 {
   "id": 1,
@@ -82,7 +86,7 @@ Example GET /devices/1
   "user": 1
 }
 
-Example GET /devices/1?expand=true
+GET /devices/1?expand=true
 
 {
   "id": 1,
@@ -99,12 +103,6 @@ Example GET /devices/1?expand=true
 
 ```
 
-
-
-
-
-
 ## Camera Stream Support
 
 Currently, SensiFlow supports only _RTSP_ streams. We are working on adding support for _RTMP_ and _HLS_ streams.
-

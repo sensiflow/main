@@ -4,7 +4,7 @@
 
 To install MkDocs, run the following command:
 
-    $ pip install mkdocs
+    $ pip install -e mkdocs-material
 
 Make sure you're in the same directory as the mkdocs.yml configuration file, and then start the server by running the mkdocs serve command:
 

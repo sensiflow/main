@@ -67,7 +67,7 @@ Many objects allow you to request additional information as an expanded response
 |-----------|------|-------------| -------- | ------- |
 | expand | boolean | Expand the response to include additional information. | No | false |
 
-### Exampel
+### Example
   
 ```json
 

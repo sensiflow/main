@@ -116,3 +116,39 @@ Response
 
 - 204 No Content on success
 - 404 Not Found if device with the given ID doesn't exist
+
+## GET `/devices/{id}/stats`
+
+Returns the statistics of a device with a given ID.
+
+Supports [**Pagination**](/api/reference#pagination)
+
+### Response
+
+- `200 OK` - success
+- `404 Not Found` if device with the given ID doesn't exist
+
+```json
+
+GET /devices/1/stats?page=1&size=2
+Content-Type: application/json
+
+{
+  "totalPages": 2,
+  "totalElements": 10,
+  "items": [
+    {
+      "deviceID": 1,
+      "startTime": "2019-07-25 21:23:00.000"
+      "endTime": "2019-07-25 21:25:00.000"
+      "peopleCount": 25
+    },
+    {
+      "deviceID": 1,
+      "startTime": "2019-07-25 21:25:00.000"
+      "endTime": "2019-07-25 21:27:00.000"
+      "peopleCount": 30
+    }
+  ]
+}
+```

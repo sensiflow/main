@@ -8,7 +8,7 @@ Supports [**Pagination**](/api/reference#pagination) and [**Expansion**](/api/re
 
 - `200 OK` - success
 
-```json
+```json title="Response body example"
 
 GET /devices?page=1&size=2
 Content-Type: application/json
@@ -22,14 +22,16 @@ Content-Type: application/json
       "name": "Device 1",
       "description": "This is device 1",
       "stream": "rtsp://my-stream:5412/1",
-      "status": "ONLINE"
+      "status": "ONLINE",
+      "user": 0
     },
     {
       "id": 2,
       "name": "Device 2",
       "description": "This is device 2",
       "stream": "rtsp://my-stream:5412/2",
-      "status": "OFFLINE"
+      "status": "OFFLINE",
+      "user": 0
     }
   ]
 }
@@ -116,3 +118,39 @@ Response
 
 - 204 No Content on success
 - 404 Not Found if device with the given ID doesn't exist
+
+## GET `/devices/{id}/stats`
+
+Returns the statistics of a device with a given ID.
+
+Supports [**Pagination**](/api/reference#pagination)
+
+### Response
+
+- `200 OK` - success
+- `404 Not Found` if device with the given ID doesn't exist
+
+```json
+
+GET /devices/1/stats?page=1&size=2
+Content-Type: application/json
+
+{
+  "totalPages": 2,
+  "totalElements": 10,
+  "items": [
+    {
+      "deviceID": 1,
+      "startTime": "2019-07-25 21:23:00.000"
+      "endTime": "2019-07-25 21:25:00.000"
+      "peopleCount": 25
+    },
+    {
+      "deviceID": 1,
+      "startTime": "2019-07-25 21:25:00.000"
+      "endTime": "2019-07-25 21:27:00.000"
+      "peopleCount": 30
+    }
+  ]
+}
+```

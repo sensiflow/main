@@ -8,7 +8,7 @@ Supports [**Pagination**](/api/reference#pagination) and [**Expansion**](/api/re
 
 - `200 OK` - success
 
-```json title="Response body example"
+```json
 
 GET /devices?page=1&size=2
 Content-Type: application/json
@@ -22,16 +22,14 @@ Content-Type: application/json
       "name": "Device 1",
       "description": "This is device 1",
       "stream": "rtsp://my-stream:5412/1",
-      "status": "ONLINE",
-      "user": 0
+      "status": "ONLINE"
     },
     {
       "id": 2,
       "name": "Device 2",
       "description": "This is device 2",
       "stream": "rtsp://my-stream:5412/2",
-      "status": "OFFLINE",
-      "user": 0
+      "status": "OFFLINE"
     }
   ]
 }

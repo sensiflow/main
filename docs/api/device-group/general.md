@@ -1,3 +1,63 @@
+## GET `/groups/{id}`
+
+Returns a device group with a given ID.
+
+### Response
+
+- `200 OK` - success
+- `404 Not Found` if device group with the given ID doesn't exist
+
+```json
+
+GET /groups/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Group 1",
+  "description": "This is the first group",
+}
+
+```
+
+## POST `/groups`
+
+Creates a new device group.
+Allows adding devices to the group, if the device's IDs are provided on the query.
+If a given device ID doesn't exist, it will cause a rollback and the group won't be created.
+
+### Query Parameters
+
+| Parameter   | Type   | Description| required |
+|-------------|--------|------------| -------- |
+| devices     | array  | device's ids| no      |
+
+
+### Request Body
+
+| Parameter   | Type   | Description| required | max length |
+|-------------|--------|------------| -------- | ---------- |
+| name        | string | device's name | yes | 20 |
+| description | string | device's description  | no | 100 |
+
+### Response
+
+- `201 Created` on success
+- `400 Bad Request` if the request body is invalid
+- `404 Not Found` if a device ID received on the query doesn't exist 
+
+```json
+POST /groups?devices=1,2
+Content-Type: application/json
+
+{
+  "name": "Group 1",
+  "description": "This is the first group",
+}
+
+```
+
+
 ## PUT `groups/{id}`
 
 Updates an existing device group with a given ID.

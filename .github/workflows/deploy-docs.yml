@@ -1,4 +1,5 @@
-name: cd-docs
+name: ci-docs
+
 on:
   push:
     branches:
@@ -17,5 +18,5 @@ jobs:
         with:
           key: ${{ github.ref }}
           path: .cache
-      - run: pip install -r docs-requirements.txt
+      - run: pip install -r docs-requirements.txt 
       - run: mkdocs gh-deploy --force

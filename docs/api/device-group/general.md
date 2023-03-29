@@ -93,6 +93,13 @@ Updates the list of devices of a group.
 |-------------|--------|------------| -------- 
 | devicesIDs        | array | device's ids | yes | 
 
+!!! info "Addition and deletion of devices in a group"
+    This is the endpoint you should use to add or delete devices in a group. The devices that will remain in the group are the ones specified in the devicesIDs array present in the request body. 
+    
+    If you want to clear all the devices from the group, you **must** provide an empty array in the request body for the effect.
+    
+
+
 Response
 
 - `204 No Content` on success

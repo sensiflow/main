@@ -83,11 +83,7 @@ Creates a new device.
 ```json
 
 {
-  "id": 3,
-  "name": "Device 3",
-  "description": "This is the third device",
-  "stream": "rtsp://my-stream:5412/3",
-  "status": "OFFLINE",
+  "id": 3
 }
 ```
 

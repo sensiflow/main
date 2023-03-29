@@ -58,7 +58,7 @@ Content-Type: application/json
 ```
 
 
-## PUT `groups/{id}`
+## PUT `/groups/{id}`
 
 Updates an existing device group with a given ID.
 
@@ -75,7 +75,7 @@ Response
 - `400 Bad Request` if the request body is invalid
 - `404 Not Found` if device group with the given ID doesn't exist
 
-## DELETE `groups/{id}`
+## DELETE `/groups/{id}`
 
 Deletes a device group with a given ID.
 

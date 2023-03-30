@@ -16,7 +16,7 @@ If you don't want to install python, you should consider using [docker](#using-d
 To install all documentation required dependencies:
 
 ```sh
-pip install -r requirements.txt
+pip install -r docs-requirements.txt
 ```
 
 Start the live-reload development server:

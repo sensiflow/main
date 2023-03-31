@@ -124,7 +124,6 @@ Supports [**Pagination**](/api/reference#pagination)
 ### Response
 
 - `200 OK` - success
-- `404 Not Found` if device with the given ID doesn't exist
 
 ```json
 
@@ -149,4 +148,21 @@ Content-Type: application/json
     }
   ]
 }
+```
+
+- `404 Not Found` if device with the given ID doesn't exist
+
+```json
+
+GET /devices/1/stats?page=1&size=2
+Content-Type: application/problem+json
+
+{
+    "type": "https://sensiflow.com/errors/device-not-found",
+    "title": "The requested resource was not found",
+    "status": 404,
+    "detail": "Device with id 1 not found",
+    "instance": "/api/v1/devices/1/stats"
+}
+
 ```

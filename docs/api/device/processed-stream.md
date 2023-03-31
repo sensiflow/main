@@ -6,7 +6,6 @@ Supports [**Expansion**](/api/reference#expanding-responses)
 ### Response
 
 - `200 OK` - success
-- `404 Not Found` if device group with the given ID doesn't exist
 
 ```json
 
@@ -15,7 +14,7 @@ Content-Type: application/json
 
 {
     "deviceID": 1,
-    "streamURL": "rtsp://my-stream:5412/1"
+    "streamUrl": "rtsp://my-stream:5412/1"
 }
 
 GET /devices/1/processed-stream?expanded=true
@@ -27,8 +26,25 @@ Content-Type: application/json
         "id": 1,
         "name": "Device 1",
         "description": "This is the first device",
-        "streamURL": "rtsp://my-stream:5412/1",
+        "streamUrl": "rtsp://my-stream:5412/1",
     }
+}
+
+```
+
+- `404 Not Found` if device group with the given ID doesn't exist
+
+```json
+
+GET /devices/1/processed-stream?expanded=false
+Content-Type: application/problem+json
+
+{
+    "type": "https://sensiflow.com/errors/device-not-found",
+    "title": "The requested resource was not found",
+    "status": 404,
+    "detail": "Device with id 1 not found",
+    "instance": "/api/v1/devices/1/processed-stream"
 }
 
 ```

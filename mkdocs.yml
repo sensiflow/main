@@ -41,6 +41,8 @@ nav:
       - Managing device groups: api/device-group/general.md
     - User:
         - Managing users: api/user/general.md
+    - Errors:
+        - Reference: api/errors/general.md
   - Contributing: 
       - Documentation: contributing/documentation.md
 

@@ -54,6 +54,11 @@ This may be caused by an invalid device group id.
 The requested processed stream does not exist.
 This may be caused by an invalid processed stream id.
 
+##### Role Not Found
+
+The requested role does not exist.
+This may happen when updating a user´s role to non existent one. 
+
 ##### Email Not Found
 
 The requested email does not exist.

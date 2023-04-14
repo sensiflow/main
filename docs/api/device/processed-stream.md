@@ -14,14 +14,14 @@ Content-Type: application/json
 
 {
     "deviceID": 1,
-    "streamUrl": "rtsp://my-stream:5412/1"
+    "processedStreamUrl": "rtsp://my-processed-stream:5412/1"
 }
 
 GET /devices/1/processed-stream?expanded=true
 Content-Type: application/json
 
 {
-    "streamURL": "rtsp://my-stream:5412/1",
+    "processedStreamURL": "rtsp://my-processed-stream:5412/1",
     "device": {
         "id": 1,
         "name": "Device 1",

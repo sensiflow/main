@@ -1,3 +1,9 @@
+In the context of your application, a "device" likely refers to a physical or virtual entity that captures and transmits camera feeds to be processed by the system. Devices could be physical cameras, such as surveillance cameras, IP cameras, or other types of cameras, that are connected to the system and send image or video data. Devices could also be virtual cameras, such as simulated camera feeds or virtual streams generated for testing or development purposes.
+
+Devices may have associated metadata or properties, such as a unique identifier, camera type, location, or other relevant information that helps identify and manage them within the system. The devices are responsible for capturing camera feeds and transmitting them to the system for processing, typically through network protocols such as RTSP (Real-Time Streaming Protocol) or other appropriate methods.
+
+In your application, the system likely manages multiple devices, handling their camera feeds simultaneously in real-time, and processing them using the image processor and other components of the system. The system may also handle device registration, configuration, monitoring, and other management tasks related to the devices, depending on the specific requirements and design of your application.
+
 ## GET `/devices`
 
 Returns a list of devices.

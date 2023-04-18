@@ -23,8 +23,10 @@ Content-Type: application/json
 ## POST `/groups`
 
 Creates a new device group.
-Allows adding devices to the group, if the device's IDs are provided on the query.
-If a given device ID doesn't exist, it will cause a rollback and the group won't be created.
+Allows to add devices to the group.
+
+!!! warning "Adding devices to a group on creation"
+    If you want to add devices to a group on creation, you must provide the device's IDs on the query. The devices will be added to the group after the group is created. If a given device ID doesn't exist, it will cause a rollback and the group won't be created.
 
 ### Query Parameters
 

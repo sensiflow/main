@@ -33,6 +33,7 @@ nav:
   - Home: index.md
   - API:
       - Reference: api/reference.md
+      - Access Control: api/access-control/general.md
       - Device:
           - Managing devices: api/device/general.md
           - Stream processing: api/device/control-media-processing.md
@@ -41,6 +42,8 @@ nav:
           - Managing device groups: api/device-group/general.md
       - User:
           - Managing users: api/user/general.md
+      - Errors:
+          - Reference: api/errors/general.md
   - Contributing:
       - Contribute to Documentation: contributing/documentation.md
       - Contribute to Image Processor: contributing/image-processor.md

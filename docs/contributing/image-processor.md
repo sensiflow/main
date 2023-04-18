@@ -26,6 +26,10 @@ Once all the pre-requisites are met, the following steps need to be followed:
     cd main
     ```
 
+    ```sh
+    git clone https://github.com/sensiflow/image-processor
+    ```
+
 2.  #### Run the required services
 
     Before running the application, make sure you have all the services running. The following services are required:

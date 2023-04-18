@@ -43,6 +43,15 @@ The `RABBITMQ` section contains the configuration parameters for the RabbitMQ co
 | `PASSWORD`       | The RabbitMQ password.                                            | `admin`        |
 | `INSTANCE_QUEUE` | The RabbitMQ queue for control messages for the instance manager. | `instance_ctl` |
 
+#### RTSP Server
+
+The `RTSP_SERVER` section contains the configuration parameters for the RTSP server.
+
+| Parameter | Description                                                                  | Example     |
+| --------- | ---------------------------------------------------------------------------- | ----------- |
+| `PORT`    | The port where the RTSP server will be listening for incoming RTSP requests. | `8554`      |
+| `HOST`    | The host where the RTSP server will be listening for incoming RTSP requests. | `localhost` |
+
 #### Hardware Acceleration
 
 Each docker instance of the image processor module can be configured to use either the CPU or the GPU for the image processing and recognition.
@@ -69,7 +78,7 @@ The Nvidia Container Toolkit has only support for the `Linux` operating system. 
     If you are using *WSL 2* with one of the distributions supported, you can use the following guide to install [CUDA on WSL2](https://docs.nvidia.com/cuda/wsl-user-guide/index.html).
 
 !!! info "Running with CPU"
-    If you don't have a GPU or for some reason you can't run the docker container with GPU support, you can run the manager to use docker containers that run image processing and recognition on the CPU. In this case you can set `PROCESSING_MODE` to `CPU`. Keep in mind that this will result in a huge performance loss in the image processing and recognition.
+If you don't have a GPU or for some reason you can't run the docker container with GPU support, you can run the manager to use docker containers that run image processing and recognition on the CPU. In this case you can set `PROCESSING_MODE` to `CPU`. Keep in mind that this will result in a huge performance loss in the image processing and recognition.
 
 ##### Find the CUDA version of your GPU
 

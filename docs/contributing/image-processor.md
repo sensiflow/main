@@ -32,10 +32,11 @@ Once all the pre-requisites are met, the following steps need to be followed:
 
     - [PostgreSQL Database](https://www.postgresql.org/download/)
     - [RabbitMQ Message Broker](https://www.rabbitmq.com/download.html)
+    - [RTSP Server (MediaMTX)](https://github.com/aler9/media-mtx)
 
     ##### Using docker-compose
 
-    If you are using Docker the main repository contains a [docker-compose.yml](https://github.com/sensiflow/main/docker-compose.yml) file that can be used to start all the required services without having to install them manually.
+    If you are using Docker the main repository contains a [docker-compose.yml](https://github.com/sensiflow/main/docker-compose.yml) file that can be used to start all the required services with the recommended configurations and schemas without having to install them manually.
 
     To start the services using docker-compose, run the following command:
 
@@ -47,9 +48,15 @@ Once all the pre-requisites are met, the following steps need to be followed:
 
     If you are not using Docker, you will need to install and run the services manually.
 
+    ###### PostgreSQL Database
+
     To populate the database with the required tables and data you can use the [./scripts/init/create_schema.sql](https://github.com/sensiflow/main/sql/init/create_schema.sql) sql file.
 
     Run it in your database management tool of choice.
+
+    ###### RabbitMQ Message Broker
+
+    The RabbitMQ Message Broker does not require any additional configuration. The instance queue is created automatically when the application starts. You only have to provide the queue name and server information in the configuration file.
 
 3.  #### Virtual environment
 

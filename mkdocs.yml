@@ -1,15 +1,15 @@
 site_name: SensiFlow
-repo_name: 'sensiflow/main'
-repo_url: 'https://github.com/sensiflow/main'
+repo_name: "sensiflow/main"
+repo_url: "https://github.com/sensiflow/main"
 theme:
   icon:
-      repo: fontawesome/brands/github
+    repo: fontawesome/brands/github
   features:
-      - navigation.footer
-      - navigation.tabs
-      - content.code.copy
-      - content.code.annotate
-      - content.tabs.link
+    - navigation.footer
+    - navigation.tabs
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
   name: material
   palette:
     # Palette toggle for light mode
@@ -27,38 +27,53 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-  
+
 # Page tree
 nav:
   - Home: index.md
   - API:
-    - Reference: api/reference.md
-    - Device:
-      - Managing devices: api/device/general.md
-      - Stream processing: api/device/control-media-processing.md
-      - Processed Stream: api/device/processed-stream.md
-    - Device Group:
-      - Managing device groups: api/device-group/general.md
-    - User:
-        - Managing users: api/user/general.md
-  - Contributing: 
-      - Documentation: contributing/documentation.md
+      - Reference: api/reference.md
+      - Device:
+          - Managing devices: api/device/general.md
+          - Stream processing: api/device/control-media-processing.md
+          - Processed Stream: api/device/processed-stream.md
+      - Device Group:
+          - Managing device groups: api/device-group/general.md
+      - User:
+          - Managing users: api/user/general.md
+  - Contributing:
+      - Contribute to Documentation: contributing/documentation.md
+      - Contribute to Image Processor: contributing/image-processor.md
+  - Reference:
+      - Image Processor Configuration File: getting-started/config-file-reference.md
 
 extra:
+  feedback:
+    title: Was this page helpful?
+    ratings:
+      - icon: material/thumb-up-outline
+        name: This page was helpful
+        data: 1
+        note: >-
+          Thanks for your feedback!
+      - icon: material/thumb-down-outline
+        name: This page could be improved
+        data: 0
+        note: >-
+          Thanks for your feedback! Help us improve this page by
+          using our <a href="https://github.com/sensiflow/main/issues/new/?title=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">feedback form</a>.
   consent:
     title: Cookie consent
-    description: >- 
+    description: >-
       We use cookies to recognize your repeated visits and preferences, as well
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
       make our documentation better.
     cookies:
-      analytics: Google Analytics 
-      github: GitHub
+      analytics: Google Analytics
     actions:
       - accept
       - manage
-      - reject
 copyright: >
   Copyright &copy; 2023 SensiFlow -
   <a href="#__consent">Change cookie settings</a>

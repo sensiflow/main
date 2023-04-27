@@ -40,12 +40,12 @@ Once all the pre-requisites are met, the following steps need to be followed:
 
     ##### Using docker-compose
 
-    If you are using Docker the main repository contains a [docker-compose.yml](https://github.com/sensiflow/main/docker-compose.yml) file that can be used to start all the required services with the recommended configurations and schemas without having to install them manually.
+    If you are using Docker, the main repository contains a [docker-compose.yml](https://github.com/sensiflow/main/blob/main/docker-compose.yml) file that can be used to start all the required services with the recommended configurations and schemas without having to install them manually.
 
     To start the services using docker-compose, run the following command:
 
     ```sh
-    docker compose up
+    docker compose up -d
     ```
 
     ##### Manually
@@ -54,7 +54,7 @@ Once all the pre-requisites are met, the following steps need to be followed:
 
     ###### PostgreSQL Database
 
-    To populate the database with the required tables and data you can use the [./scripts/init/create_schema.sql](https://github.com/sensiflow/main/sql/init/create_schema.sql) sql file.
+    To populate the database with the required tables and data you can use the [create_schema.sql](https://github.com/sensiflow/main/blob/main/sql/init/create_schema.sql) sql file in `sql/init/` folder.
 
     Run it in your database management tool of choice.
 
@@ -80,6 +80,16 @@ Once all the pre-requisites are met, the following steps need to be followed:
         ```bash
         poetry install
         ```
+
+4.  #### Create a branch for your changes
+
+    ```sh
+    git checkout -b <branch-name>
+    ```
+
+    !!! note "Branch naming convention"
+
+        For now we are not enforcing any branch naming convention.
 
 ## Running the application
 
@@ -180,8 +190,6 @@ Tox will run the code checks for python versions `3.8`, `3.9` and `3.10`, which 
 
 ### Running tests
 
-The tests use [pytest](https://docs.pytest.org/en/stable/).
-
 To run the tests, use the following command in the same terminal where you activated the virtual environment:
 
 ```bash
@@ -189,8 +197,6 @@ poetry run pytest
 ```
 
 ### Running the linter
-
-The linter is run using [flake8](https://flake8.pycqa.org/en/latest/).
 
 To run the linter, use the following command in the same terminal where you activated the virtual environment:
 

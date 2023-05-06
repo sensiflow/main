@@ -9,7 +9,7 @@ This section will help you start writing documentation for our project.
 ## Using pip
 
 !!! warning "Python 3.7 or higher required"
-        These instructions assume you have Python 3.7 or higher and pip installed. If you don't have Python installed, you can download it from the [Python website](https://www.python.org/downloads/).
+    These instructions assume you have Python 3.7 or higher and pip installed. If you don't have Python installed, you can download it from the [Python website](https://www.python.org/downloads/).
 
 If you don't want to install python, you should consider using [docker](#using-docker) to run the development server.
 
@@ -34,9 +34,10 @@ Assuming you have Docker installed, you can use the provided Dockerfile to build
 ### Build the Docker image
 
 To build the documentation Docker image:
-`sh
-    docker build -t sensiflow-docs -f ./docker/Dockerfile-docs .
-    `
+
+```sh
+docker build -t sensiflow-docs -f ./docker/Dockerfile-docs .
+```
 
 ### Run a container from the image
 

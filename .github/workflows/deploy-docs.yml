@@ -18,5 +18,8 @@ jobs:
         with:
           key: ${{ github.ref }}
           path: .cache
-      - run: pip install -r docs-requirements.txt 
-      - run: mkdocs gh-deploy --force
+      - run: pip install -r docs-requirements.txt
+      - name: Deploy Docs
+        env:
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
+        run: mkdocs gh-deploy --force

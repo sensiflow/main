@@ -1,8 +1,10 @@
-In the context of your application, a "device" likely refers to a physical or virtual entity that captures and transmits camera feeds to be processed by the system. Devices could be physical cameras, such as surveillance cameras, IP cameras, or other types of cameras, that are connected to the system and send image or video data. Devices could also be virtual cameras, such as simulated camera feeds or virtual streams generated for testing or development purposes.
+# Device API
 
-Devices may have associated metadata or properties, such as a unique identifier, camera type, location, or other relevant information that helps identify and manage them within the system. The devices are responsible for capturing camera feeds and transmitting them to the system for processing, typically through network protocols such as RTSP (Real-Time Streaming Protocol) or other appropriate methods.
+In the context of Sensiflow's api, a "device" likely refers to a physical or virtual entity that captures and transmits a feed to be processed by our system. Devices could be physical cameras, such as surveillance cameras, IP cameras, or other types of cameras, that are connected to the system and send image or video data. Devices could also be virtual cameras, such as simulated camera feeds or virtual streams generated for testing or development purposes.
 
-In your application, the system likely manages multiple devices, handling their camera feeds simultaneously in real-time, and processing them using the image processor and other components of the system. The system may also handle device registration, configuration, monitoring, and other management tasks related to the devices, depending on the specific requirements and design of your application.
+The devices are responsible for capturing camera feeds and transmitting them to the system for processing, typically through network protocols such as RTSP (Real-Time Streaming Protocol) or other appropriate methods.
+
+The system manages multiple devices, handling their camera feeds simultaneously in real-time, and processing them using the image processor and other components of the system. The system may also handle device registration and processing management for the devices such as starting, pausing, or stopping the processing of a device's feed.
 
 ## GET `/devices`
 
@@ -72,14 +74,13 @@ Content-Type: application/json
 
 Creates a new device.
 
-
 ### Request Body
 
-| Parameter   | Type   | Description| required | max length |
-|-------------|--------|------------| -------- | ---------- |
-| name        | string | device's name | yes | 20 |
-| description | string | device's description  | no | 100 |
-| streamUrl    | string | _RTSP_ Url where the device's feed is being transmitted  | yes | 200 |
+| Parameter   | Type   | Description                                             | required | max length |
+| ----------- | ------ | ------------------------------------------------------- | -------- | ---------- |
+| name        | string | device's name                                           | yes      | 20         |
+| description | string | device's description                                    | no       | 100        |
+| streamUrl   | string | _RTSP_ Url where the device's feed is being transmitted | yes      | 200        |
 
 ### Response
 
@@ -87,7 +88,6 @@ Creates a new device.
 - `400 Bad Request if the request body is invalid`
 
 ```json
-
 {
   "id": 3
 }
@@ -95,16 +95,19 @@ Creates a new device.
 
 ## PUT `/devices/{id}`
 
-Updates an existing device with a given ID.
-
+Updates an existing device details with a given ID.
 
 ### Request Body
 
-| Parameter   | Type   | Description| required | max length |
-|-------------|--------|------------| -------- | ---------- |
-| name        | string | device's name | no | 20 |
-| description | string | device's description  | no | 100 |
-| streamUrl    | string | _RTSP_ Url where the device's feed is being transmitted  | no | 200 |
+| Parameter   | Type   | Description                                             | required | max length |
+| ----------- | ------ | ------------------------------------------------------- | -------- | ---------- |
+| name        | string | device's name                                           | no       | 20         |
+| description | string | device's description                                    | no       | 100        |
+| streamUrl   | string | _RTSP_ Url where the device's feed is being transmitted | no       | 200        |
+
+!!! warning
+
+    If a device is currently being processed, updating a device's streamUrl will cause the processing of the device's feed to be stopped.
 
 Response
 
@@ -157,18 +160,3 @@ Content-Type: application/json
 ```
 
 - `404 Not Found` if device with the given ID doesn't exist
-
-```json
-
-GET /devices/1/stats?page=1&size=2
-Content-Type: application/problem+json
-
-{
-    "type": "https://sensiflow.com/errors/device-not-found",
-    "title": "The requested resource was not found",
-    "status": 404,
-    "detail": "Device with id 1 not found",
-    "instance": "/api/v1/devices/1/stats"
-}
-
-```

@@ -4,19 +4,23 @@ This is what a configuration file looks like:
 
 ```ini
 [DATABASE]
-URL=postgres://postgres:postgres@localhost:5432
+HOST=localhost
+PORT=5432
+USER=postgres
+PASSWORD=postgres
 
 [RABBITMQ]
 HOST=localhost
 PORT=5672
 USER=guest
 PASSWORD=guest
-INSTANCE_QUEUE=instance_ctl
+INSTANCE_CONTROLLER_QUEUE=instance_ctl
+ACK_DEVICE_STATUS_QUEUE=instance_ack_device_state
+ACK_DEVICE_DELETE_QUEUE=instance_ack_device_delete
 
 [HARDWARE_ACCELERATION]
 PROCESSING_MODE=GPU
 CUDA_VERSION=11.7
-
 ```
 
 The following table lists the configuration parameters that can be set in the configuration file for the image processor module.
@@ -27,21 +31,26 @@ The following table lists the configuration parameters that can be set in the co
 
 The `DATABASE` section contains the configuration parameters for the database connection.
 
-| Parameter | Description                    | Example                                                  |
-| --------- | ------------------------------ | -------------------------------------------------------- |
-| `URL`     | Url to connect to the database | `postgresql://postgres:postgres@localhost:5432/postgres` |
+| Parameter  | Description            | Example     |
+| ---------- | ---------------------- | ----------- |
+| `HOST`     | The database host.     | `localhost` |
+| `PORT`     | The database port.     | `5432`      |
+| `USER`     | The database user.     | `postgres`  |
+| `PASSWORD` | The database password. | `postgres`  |
 
 #### RABBITMQ
 
 The `RABBITMQ` section contains the configuration parameters for the RabbitMQ connection.
 
-| Parameter        | Description                                                       | Example        |
-| ---------------- | ----------------------------------------------------------------- | -------------- |
-| `HOST`           | The RabbitMQ host.                                                | `localhost`    |
-| `PORT`           | The RabbitMQ port.                                                | `5672`         |
-| `USER`           | The RabbitMQ user.                                                | `admin`        |
-| `PASSWORD`       | The RabbitMQ password.                                            | `admin`        |
-| `INSTANCE_QUEUE` | The RabbitMQ queue for control messages for the instance manager. | `instance_ctl` |
+| Parameter                   | Description                                                       | Example                      |
+| --------------------------- | ----------------------------------------------------------------- | ---------------------------- |
+| `HOST`                      | The RabbitMQ host.                                                | `localhost`                  |
+| `PORT`                      | The RabbitMQ port.                                                | `5672`                       |
+| `USER`                      | The RabbitMQ user.                                                | `guest`                      |
+| `PASSWORD`                  | The RabbitMQ password.                                            | `guest`                      |
+| `INSTANCE_CONTROLLER_QUEUE` | The RabbitMQ queue for control messages for the instance manager. | `instance_ctl`               |
+| `ACK_DEVICE_STATUS_QUEUE`   | The RabbitMQ queue to acknowledge device status messages.         | `instance_ack_device_state`  |
+| `ACK_DEVICE_DELETE_QUEUE`   | The RabbitMQ queue to acknowledge device remove messages.         | `instance_ack_device_delete` |
 
 #### RTSP Server
 
@@ -58,10 +67,10 @@ Each docker instance of the image processor module can be configured to use eith
 
 The `Hardware Acceleration` section contains the configuration parameters for the hardware acceleration of the image processing and recognition of the docker instances.
 
-| Parameter       | Description                                                                              | Example    |
-| --------------- | ---------------------------------------------------------------------------------------- | ---------- |
-| PROCESSING_MODE | The hardware acceleration mode for the image processing of the image processor instances | GPU or CPU |
-| CUDA_VERSION    | The CUDA version to use for the image processing of the image processor instances.       | 11.7       |
+| Parameter       | Description                                                                              | Example        |
+| --------------- | ---------------------------------------------------------------------------------------- | -------------- |
+| PROCESSING_MODE | The hardware acceleration mode for the image processing of the image processor instances | `GPU` or `CPU` |
+| CUDA_VERSION    | The CUDA version to use for the image processing of the image processor instances.       | `11.7`         |
 
 !!! note "Cuda with GPU"
 
@@ -78,7 +87,8 @@ The Nvidia Container Toolkit has only support for the `Linux` operating system. 
     If you are using *WSL 2* with one of the distributions supported, you can use the following guide to install [CUDA on WSL2](https://docs.nvidia.com/cuda/wsl-user-guide/index.html).
 
 !!! info "Running with CPU"
-If you don't have a GPU or for some reason you can't run the docker container with GPU support, you can run the manager to use docker containers that run image processing and recognition on the CPU. In this case you can set `PROCESSING_MODE` to `CPU`. Keep in mind that this will result in a huge performance loss in the image processing and recognition.
+
+    If you don't have a GPU or for some reason you can't run the docker container with GPU support, you can run the manager to use docker containers that run image processing and recognition on the CPU. In this case you can set `PROCESSING_MODE` to `CPU`. Keep in mind that this will result in a huge performance loss in the image detection and stream processing.
 
 ##### Find the CUDA version of your GPU
 

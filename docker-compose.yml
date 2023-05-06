@@ -18,6 +18,12 @@ services:
     restart: always
     ports:
       - 8080:8080
+  cache:
+    image: redis
+    container_name: api_redis_cache
+    restart: always
+    ports:
+      - 6379:6379 
   broker:
     image: rabbitmq:3-management
     hostname: rabbitmq

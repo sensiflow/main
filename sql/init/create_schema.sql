@@ -72,10 +72,11 @@ create table if not exists ProcessedStream(
 );
 
 create table if not exists Instance(
-                                       id varchar(50) UNIQUE NOT null,
+                                       id int primary key,
                                        status VARCHAR(255) NOT null CHECK (status IN ('ACTIVE', 'INACTIVE', 'PAUSED')),
                                        created_at TIMESTAMP,
-                                       updated_at TIMESTAMP CONSTRAINT updated_at_check CHECK (updated_at >= created_at)
+                                       updated_at TIMESTAMP CONSTRAINT updated_at_check CHECK (updated_at >= created_at),
+                                       scheduled_for_deletion boolean NOT null default false
 );
 
 commit;

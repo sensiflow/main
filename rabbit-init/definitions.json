@@ -6,8 +6,20 @@
             "durable": true,
             "auto_delete": false,
             "arguments": {
-                "x-queue-type": "classic"
+                "x-queue-type": "classic",
+                "x-dead-letter-exchange": "instance_ctl_retry_exchange"
             }
+        },
+        {
+          "name": "instance_ctl_retry",
+          "vhost": "/",
+          "durable": true,
+          "auto_delete": false,
+          "arguments": {
+              "x-queue-type": "classic",
+              "x-dead-letter-exchange": "instance_ctl_exchange",
+              "x-message-ttl": 30000 
+          }
         },
         {
           "name": "instance_ack_device_state",
@@ -39,7 +51,7 @@
             "arguments": {}
         },
         {
-          "name": "instance_ack_device_state_exchange",
+          "name": "instance_ctl_retry_exchange",
           "vhost": "/",
           "type": "direct",
           "durable": true,
@@ -48,7 +60,7 @@
           "arguments": {}
         },
         {
-          "name": "instance_ack_device_delete_exchange",
+          "name": "instance_ack_exchange",
           "vhost": "/",
           "type": "direct",
           "durable": true,
@@ -67,7 +79,15 @@
             "arguments": {}
         },
         {
-          "source": "instance_ack_device_state_exchange",
+          "source": "instance_ctl_retry_exchange",
+          "vhost": "/",
+          "destination": "instance_ctl_retry",
+          "destination_type": "queue",
+          "routing_key": "instance_ctl",
+          "arguments": {}
+        },
+        {
+          "source": "instance_ack_exchange",
           "vhost": "/",
           "destination": "instance_ack_device_state",
           "destination_type": "queue",
@@ -75,7 +95,7 @@
           "arguments": {}
       },
       {
-        "source": "instance_ack_device_delete_exchange",
+        "source": "instance_ack_exchange",
         "vhost": "/",
         "destination": "instance_ack_device_delete",
         "destination_type": "queue",

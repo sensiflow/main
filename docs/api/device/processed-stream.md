@@ -26,7 +26,10 @@ Content-Type: application/json
         "id": 1,
         "name": "Device 1",
         "description": "This is the first device",
-        "streamUrl": "rtsp://my-stream:5412/1",
+        "streamURL": "rtsp://my-stream:5412/1",
+        "processingState": "ACTIVE",
+        "userID": 1,
+        "deviceGroupsID": []
     }
 }
 
@@ -44,7 +47,8 @@ Content-Type: application/problem+json
     "title": "The requested resource was not found",
     "status": 404,
     "detail": "Device with id 1 not found",
-    "instance": "/api/v1/devices/1/processed-stream"
+    "instance": "/api/v1/devices/1/processed-stream",
+    "properties": null
 }
 
 ```

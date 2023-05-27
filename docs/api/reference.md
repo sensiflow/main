@@ -34,12 +34,12 @@ The response for a paginated request always follows the same `page` structure:
 
 ```json
 
-Example GET /devices?page=1&size=2
+Example GET /devices?page=1&size=10
 
 {
   "totalPages": 2,
   "totalElements": 10,
-  "isLast": false,
+  "isLast": true,
   "isFirst": true,
   "items": [
     {
@@ -66,9 +66,11 @@ Example GET /devices?page=1&size=2
 
 Many objects allow you to request additional information as an expanded response by using the `expand` request parameter.
 
-| Parameter | Type    | Description                                            | Required | Default |
-| --------- | ------- | ------------------------------------------------------ | -------- | ------- |
-| expand    | boolean | Expand the response to include additional information. | No       | false   |
+
+| Parameter | Type | Description | Required | Default |
+|-----------|------|-------------| -------- | ------- |
+| expanded | boolean | Expand the response to include additional information. | No | false |
+
 
 This allows you to request additional information about the object in the response, without having to make additional requests.
 
@@ -98,9 +100,9 @@ This allows you to request additional information about the object in the respon
         "stream": "rtsp://my-stream:5412/1",
         "status": "ONLINE",
         "user": {
-        "id": 1,
-        "firstName": "John",
-        "lastName": "Doe",
+          "id": 1,
+          "firstName": "John",
+          "lastName": "Doe"
         }
     }
 

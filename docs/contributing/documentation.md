@@ -3,7 +3,7 @@
 This section will help you start writing documentation for our project.
 
 !!! note "**Context directory**"
-    
+
     The following instructions assume you are in the root directory of the project.
 
 ## Using pip
@@ -20,6 +20,7 @@ pip install -r docs-requirements.txt
 ```
 
 Start the live-reload development server:
+
 ```sh
 mkdocs serve
 ```
@@ -34,12 +35,14 @@ Assuming you have Docker installed, you can use the provided Dockerfile to build
 
 To build the documentation Docker image:
 
-    docker build -t sensiflow-docs .
+```sh
+docker build -t sensiflow-docs -f ./docker/Dockerfile-docs .
+```
 
 ### Run a container from the image
 
-=== "Linux or Windows Powershell"
-    
+=== "Linux, Windows Powershell or MacOs"
+
     ```sh
     docker run -it --rm -p 8000:8000 -v ${PWD}:/docs sensiflow-docs
     ```
@@ -47,14 +50,11 @@ To build the documentation Docker image:
 === "Windows CMD"
 
     ```sh
-    docker run --rm -it -p 8000:8000 -v %cd%:/docs sensiflow-docs   
+    docker run --rm -it -p 8000:8000 -v %cd%:/docs sensiflow-docs
     ```
-        
-        
 
 ## Done!
 
 You should have a live-reloading development server running at [http://localhost:8000](http://localhost:8000).
 
 Writing anything in the docs folder will automatically trigger a rebuild of the site.
-

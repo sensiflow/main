@@ -1,3 +1,11 @@
+# Device API
+
+In the context of Sensiflow's api, a "device" likely refers to a physical or virtual entity that captures and transmits a feed to be processed by our system. Devices could be physical cameras, such as surveillance cameras, IP cameras, or other types of cameras, that are connected to the system and send image or video data. Devices could also be virtual cameras, such as simulated camera feeds or virtual streams generated for testing or development purposes.
+
+The devices are responsible for capturing camera feeds and transmitting them to the system for processing, typically through network protocols such as RTSP (Real-Time Streaming Protocol) or other appropriate methods.
+
+The system manages multiple devices, handling their camera feeds simultaneously in real-time, and processing them using the image processor and other components of the system. The system may also handle device registration and processing management for the devices such as starting, pausing, or stopping the processing of a device's feed.
+
 ## GET `/devices`
 
 Returns a list of devices.
@@ -89,7 +97,6 @@ Content-Type: application/problem+json
 
 Creates a new device.
 
-
 ### Request Body
 
 | Parameter   | Type   | Description| required | max length |
@@ -97,6 +104,7 @@ Creates a new device.
 | name        | string | device's name | yes | 20 |
 | description | string | device's description  | no | 100 |
 | streamURL    | string | _RTSP_ Url where the device's feed is being transmitted  | yes | 200 |
+
 
 ### Response
 
@@ -131,8 +139,7 @@ Content-Type: application/problem+json
 
 ## PUT `/devices/{id}`
 
-Updates an existing device with a given ID.
-
+Updates an existing device details with a given ID.
 
 ### Request Body
 
@@ -141,6 +148,10 @@ Updates an existing device with a given ID.
 | name        | string | device's name | no | 20 |
 | description | string | device's description  | no | 100 |
 | streamURL    | string | _RTSP_ Url where the device's feed is being transmitted  | no | 200 |
+
+!!! warning
+
+    If a device is currently being processed, updating a device's streamUrl will cause the processing of the device's feed to be stopped.
 
 Response
 
@@ -241,6 +252,7 @@ Content-Type: application/json
 ```
 
 - `404 Not Found` if device with the given ID doesn't exist
+
 
 ```json
 

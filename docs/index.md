@@ -13,35 +13,39 @@ Our system is built on top of the following open-source technologies:
 ::cards::
 
 - title: Docker
-  content: Brief description of Docker goes here
+  content: Used for containerization of the application
   url: https://www.docker.com/
 
 - title: React
-  content: Brief description of React goes here
+  content: Used to build the web application
   url: https://react.dev/
 
 - title: Spring Boot
-  content: Brief description of Spring Boot goes here
+  content: Used to build the web API
   url: https://spring.io/
 
 - title: PostgreSQL
-  content: Brief description of PostgreSQL goes here
+  content: Used as the database
   url: https://www.postgresql.org/
 
 - title: RabbitMQ
-  content:  Brief description of RabbitMQ goes here
+  content: Used as the message broker for the detection system pipeline
   url: https://www.rabbitmq.com/
 
 - title: OpenCV
-  content:  Brief description of OpenCV goes here
+  content: Brief description of OpenCV goes here
   url: https://opencv.org/
 
 - title: YOLOv5
-  content:  Brief description of YOLOv5 goes here
-  url: https://git
+  content: Used as the base machine learning model for object and person detection
+  url: https://github.com/ultralytics/yolov5
 
 - title: Python
-  content: Brief description of Python goes here
+  content: Used to build the entire image processor module
   url: https://www.python.org/
+
+- title: MediaMTX
+  content: Used as the streaming server
+  url: https://github.com/aler9/mediamtx
 
 ::/cards::

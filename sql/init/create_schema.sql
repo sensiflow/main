@@ -57,7 +57,7 @@ create table if not exists DeviceGroupLink(
 create table if not exists Metric(
                                      deviceID int,
                                      start_time timestamp not null,
-                                     end_time timestamp not null,
+                                     end_time timestamp,
                                      peopleCount int not null default 0,
                                      foreign key (deviceID) references Device(id),
                                      primary key (deviceID, start_time)

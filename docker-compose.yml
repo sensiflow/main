@@ -18,12 +18,6 @@ services:
     restart: always
     ports:
       - 8080:8080
-  cache:
-    image: redis
-    container_name: api_redis_cache
-    restart: always
-    ports:
-      - 6379:6379 
   broker:
     image: rabbitmq:3-management
     hostname: rabbitmq
@@ -42,3 +36,16 @@ services:
     restart: always
     ports:
       - 8554:8554
+  web-api:
+    ports:
+      - 8090:8090
+    build:
+      context: ./sensi-web-api
+      dockerfile: ./Dockerfile
+      restart: always
+    depends_on:
+      - database
+      - broker
+      - rtsp
+    environment:
+      - JDBC_DATABASE_URL=jdbc:postgresql://postgresdb/postgres?user=postgres&password=postgres

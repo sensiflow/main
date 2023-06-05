@@ -42,10 +42,10 @@ services:
     build:
       context: ./sensi-web-api
       dockerfile: ./Dockerfile
-      restart: always
+    restart: always
     depends_on:
       - database
       - broker
       - rtsp
     environment:
-      - JDBC_DATABASE_URL=jdbc: postgresql://postgresdb/postgres?user=postgres&password=postgres
+      - JDBC_DATABASE_URL=jdbc:postgresql://postgresdb/postgres?user=postgres&password=postgres

@@ -59,7 +59,7 @@ create table if not exists DeviceGroupLink(
 create table if not exists Metric(
                                      deviceID int,
                                      start_time timestamp not null,
-                                     end_time timestamp not null,
+                                     end_time timestamp,
                                      peopleCount int not null default 0,
                                      foreign key (deviceID) references Device(id),
                                      primary key (deviceID, start_time)
@@ -72,10 +72,10 @@ create table if not exists ProcessedStream(
 );
 
 create table if not exists Instance(
-                                       id int primary key,
-                                       status VARCHAR(255) NOT null CHECK (status IN ('ACTIVE', 'INACTIVE', 'PAUSED')),
-                                       created_at TIMESTAMP,
-                                       updated_at TIMESTAMP CONSTRAINT updated_at_check CHECK (updated_at >= created_at),
+            id int primary key,
+            status VARCHAR(255) NOT null CHECK (status IN ('ACTIVE', 'INACTIVE', 'PAUSED')),
+            created_at TIMESTAMP,
+            updated_at TIMESTAMP CONSTRAINT updated_at_check CHECK (updated_at >= created_at)
 );
 
 commit;

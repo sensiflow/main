@@ -42,10 +42,8 @@ create table if not exists Device(
                                      streamURL varchar(200) not null, --The max length of a RTSP URL is 200 bytes
                                      description varchar(255),
                                      processingState varchar(15) not null default 'INACTIVE',
-                                     userID int,
                                      pending_update boolean NOT null default false,
-                                     scheduled_for_deletion boolean NOT null default false,
-                                     foreign key (userID) references "user"(id)
+                                     scheduled_for_deletion boolean NOT null default false
 );
 
 create table if not exists DeviceGroupLink(
@@ -72,10 +70,10 @@ create table if not exists ProcessedStream(
 );
 
 create table if not exists Instance(
-            id int primary key,
-            status VARCHAR(255) NOT null CHECK (status IN ('ACTIVE', 'INACTIVE', 'PAUSED')),
-            created_at TIMESTAMP,
-            updated_at TIMESTAMP CONSTRAINT updated_at_check CHECK (updated_at >= created_at)
+                                       id int primary key,
+                                       status VARCHAR(255) NOT null CHECK (status IN ('ACTIVE', 'INACTIVE', 'PAUSED')),
+                                       created_at TIMESTAMP,
+                                       updated_at TIMESTAMP CONSTRAINT updated_at_check CHECK (updated_at >= created_at)
 );
 
 commit;

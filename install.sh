@@ -18,6 +18,8 @@ cd ..
 
 cd sensi-web-api
 
-./gradlew.bat bootjar
+chmod +x gradlew
+
+./gradlew bootjar
 
 cd ..

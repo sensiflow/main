@@ -44,7 +44,7 @@ Once all the pre-requisites are met, the following steps need to be followed:
 
 2.  #### Run the required services
 
-    If you come from the main repository project installation guide, you can skip to [step 3](####Virtual-environment).
+    If you come from the main repository project installation guide, you can skip to [step 3](https://docs.sensiflow.org/contributing/image-processor/#virtual-environment).
 
     If you are solely interested in the image-processor module, you can follow the steps below to run the required services.
 

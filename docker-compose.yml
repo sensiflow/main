@@ -42,7 +42,7 @@ services:
     build:
       context: ./sensi-web-api
       dockerfile: ./Dockerfile
-      restart: always
+    restart: always
     depends_on:
       - database
       - broker

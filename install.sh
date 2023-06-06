@@ -6,9 +6,9 @@ echo "Building webApp distribution"
 
 cd sensi-web
 
-npm install
 npm run build
 
+mkdir -p ../sensi-web-api/src/main/resources/static/
 cp -r dist/* ../sensi-web-api/src/main/resources/static/
 cp -r public/* ../sensi-web-api/src/main/resources/static/
 
@@ -18,6 +18,8 @@ cd ..
 
 cd sensi-web-api
 
-./gradlew.bat bootjar
+chmod +x ./gradlew
+
+./gradlew bootjar
 
 cd ..

@@ -6,11 +6,11 @@ echo "Building web application distribution files..."
 
 cd sensi-web
 
-npm install
-npm run build
+call npm run build
 
-Xcopy /E /I dist/* ..\sensi-web-api\src\main\resources\static\
-Xcopy /E /I public/* ..\sensi-web-api\src\main\resources\static\
+mkdir ..\sensi-web-api\src\main\resources\static\
+Xcopy /E /I /Y dist\* ..\sensi-web-api\src\main\resources\static\
+Xcopy /E /I /Y public\* ..\sensi-web-api\src\main\resources\static\
 
 cd ..
 

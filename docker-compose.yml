@@ -30,22 +30,13 @@ services:
       - ./broker_data:/var/lib/rabbitmq/
       - ./rabbit-init/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
       - ./rabbit-init/definitions.json:/etc/rabbitmq/definitions.json:ro
-  rtsp:
-    image: aler9/rtsp-simple-server
-    container_name: rtsp
+  media-server:
+    image: bluenviron/mediamtx:0.23.5
+    container_name: media-server
     restart: always
     ports:
       - 8554:8554
-  web-api:
-    ports:
-      - 8090:8090
-    build:
-      context: ./sensi-web-api
-      dockerfile: ./Dockerfile
-    restart: always
-    depends_on:
-      - database
-      - broker
-      - rtsp
-    environment:
-      - JDBC_DATABASE_URL=jdbc:postgresql://postgresdb/postgres?user=postgres&password=postgres
+      - 8888:8888
+    volumes:
+      - ./media-server-config/mediamtx.yml:/mediamtx.yml
+    network_mode: "host"  

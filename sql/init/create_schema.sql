@@ -60,4 +60,12 @@ create table if not exists Metric(
                                      primary key (deviceID, start_time)
 );
 
+
+create table if not exists Instance(
+                                       id int primary key,
+                                       status VARCHAR(255) NOT null CHECK (status IN ('ACTIVE', 'INACTIVE', 'PAUSED')),
+                                       created_at TIMESTAMP,
+                                       updated_at TIMESTAMP CONSTRAINT updated_at_check CHECK (updated_at >= created_at)
+);
+
 commit;

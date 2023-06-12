@@ -35,8 +35,11 @@ services:
     container_name: media-server
     restart: always
     ports:
-      - 8554:8554
-      - 8888:8888
+      - 8554:8554 # RTSP
+      - 1935:1935 # RTMP
+      - 8888:8888 # HLS
+      - 8889:8889 # WebRTC
     volumes:
       - ./media-server-config/mediamtx.yml:/mediamtx.yml
-    network_mode: "host"  
+    environment:
+        - MTX_PROTOCOLS=tcp

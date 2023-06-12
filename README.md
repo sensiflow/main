@@ -14,7 +14,7 @@ The repository is structured as follows:
 
 ## Run project from this repository
 
-Before running the project, make sure you have [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/), [JDK 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html) and [Node.js 9.1.1+](https://nodejs.org/en/download/) installed on your machine.
+Before running the project, make sure you have [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/), [JDK 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html) and [npm 9.1.1+](https://nodejs.org/en/download/) installed on your machine.
 
 The first step is to clone this repository:
 

@@ -1,0 +1,45 @@
+services:
+  database:
+    container_name: postgresdb
+    hostname: postgresdb
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+  dbadmin:
+    image: adminer
+    container_name: dbadmin
+    restart: always
+    ports:
+      - 8080:8080
+  broker:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    container_name: rabbitmq-broker
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./broker_data:/var/lib/rabbitmq/
+      - ./rabbit-init/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./rabbit-init/definitions.json:/etc/rabbitmq/definitions.json:ro
+  media-server:
+    image: bluenviron/mediamtx:0.23.5
+    container_name: media-server
+    restart: always
+    ports:
+      - 8554:8554 # RTSP
+      - 1935:1935 # RTMP
+      - 8888:8888 # HLS
+      - 8889:8889 # WebRTC
+    volumes:
+      - ./media-server-config/mediamtx.yml:/mediamtx.yml
+    environment:
+        - MTX_PROTOCOLS=tcp

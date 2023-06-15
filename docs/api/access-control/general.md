@@ -19,11 +19,12 @@ The `Admin` user can then create new users, and assign them its role.
 
 The following table shows the access to the resources for each role:
 
-| Resource         | Action | Owner | Admin | User |
+| Resource         | Action | Admin | Moderator | User |
 | ---------------- | ------ | ----- | ----- | ---- |
 | User             | Create | ✓     | ✓     | X    |
 | User             | Read   | ✓     | ✓     | ✓    |
 | User             | Update | ✓     | ✓     | ✓    |
+| User             | Delete | ✓     | X     | X     |
 | Device           | Create | ✓     | ✓     | X    |
 | Device           | Read   | ✓     | ✓     | ✓    |
 | Device           | Update | ✓     | ✓     | X    |
@@ -56,7 +57,7 @@ This will destroy the session, and the user will have to login again to make req
 
 ##### Register
 
-In Sensiflow, a user can only be registered by the `Admin` user.
+In Sensiflow, a user can be registered by an `Admin` or a `Moderator` user.
 Send a `POST` request to the [register endpoint](/api/user/general#post-users).
 
 *[RBAC]: Role Based Access Control

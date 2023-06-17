@@ -48,4 +48,4 @@ To run the web application, run the following command:
 docker-compose up --build -d
 ```
 
-To run the instance manager and scheduler please refer to the [Image Processor installation guide](https://docs.sensiflow.org/contributing/image-processor).
+To run the instance manager and scheduler please refer to the [Image Processor installation guide](https://sensiflow.github.io/main/contributing/image-processor/).

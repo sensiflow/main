@@ -17,7 +17,7 @@ services:
     container_name: dbadmin
     restart: always
     ports:
-      - 8080:8080
+      - 8081:8080
   broker:
     image: rabbitmq:3-management
     hostname: rabbitmq
@@ -36,10 +36,35 @@ services:
     restart: always
     ports:
       - 8554:8554 # RTSP
+      - 8322:8322 # RTSPS
       - 1935:1935 # RTMP
       - 8888:8888 # HLS
       - 8889:8889 # WebRTC
     volumes:
       - ./media-server-config/mediamtx.yml:/mediamtx.yml
+      - ./media-server-config/server.crt:/server.crt
+      - ./media-server-config/server.key:/server.key
     environment:
         - MTX_PROTOCOLS=tcp
+  web-api:
+    expose:   #"expose" only exposes ports to other services on the nertwork, "ports" exposes to also the host
+        - 8090
+    build:
+        context: ./sensi-web-api
+        dockerfile: ./Dockerfile
+    restart: always
+    depends_on:
+      - database
+      - broker
+      - media-server
+    environment:
+      - JDBC_DATABASE_URL=jdbc:postgresql://postgresdb/postgres?user=postgres&password=postgres
+      - RABBITMQ_HOST=broker
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web-api
+    ports:
+      - "8080:8080"

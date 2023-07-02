@@ -66,9 +66,9 @@ This may be caused by search for a non existing email.
 
 ### Authentication and Authorization errors
 
-##### Unauthorized
+##### Forbidden
 
-The request was not authorized.
+The request is not allowed with the given credentials.
 This can happen when you try to access a resource that you are not authorized to access.
 This may be cause by not having enough permissions to access the resource.
 

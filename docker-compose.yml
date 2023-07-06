@@ -42,10 +42,11 @@ services:
       - 8889:8889 # WebRTC
     volumes:
       - ./media-server-config/mediamtx.yml:/mediamtx.yml
-      - ./media-server-config/server.crt:/server.crt
-      - ./media-server-config/server.key:/server.key
     environment:
         - MTX_PROTOCOLS=tcp
+    secrets:
+      - server.crt
+      - server.key
   web-api:
     expose:   #"expose" only exposes ports to other services on the nertwork, "ports" exposes to also the host
         - 8090
@@ -60,11 +61,31 @@ services:
     environment:
       - JDBC_DATABASE_URL=jdbc:postgresql://postgresdb/postgres?user=postgres&password=postgres
       - RABBITMQ_HOST=broker
+      - SECURE=false
+      - KEY_STORE_PATH=/run/secrets/server.p12
+    secrets:
+      - server.p12
+      
   nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-nginx
+      args:
+       - SECURE=false
+       - API_SECURE=false
     depends_on:
       - web-api
     ports:
-      - "8080:8080"
+      - "443:443"
+      - "80:80"
+    secrets:
+      - server.key
+      - server.crt
+      
+secrets:
+  server.p12:
+    file: ./server.p12
+  server.crt:
+    file: ./server.crt
+  server.key:
+    file: ./server.key

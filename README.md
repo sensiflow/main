@@ -49,3 +49,25 @@ docker-compose up --build -d
 ```
 
 To run the instance manager and scheduler please refer to the [Image Processor installation guide](https://sensiflow.github.io/main/contributing/image-processor/).
+
+
+### Use of SSL
+
+The use of SSL is possible in the media server, API and nginx.
+
+To use SSL, you must have a valid certificate and key file, and place them in the root directory folder.
+These files must be named `server.crt` and `server.key` respectively.
+
+#### API
+To use SLL in the API a keystore file must be provided in the root directory folder, named `server.p12`.
+Its password can be set as an environment variable `KEY_STORE_PASSWORD` in the `web-api` section present in the `docker-compose.yml` file.
+
+After that, the `SECURE` environment variable must be set to `true` in the `web-api` section present in the `docker-compose.yml` file.
+
+#### Media Server
+
+On the media server config at `media-server-config/mediamtx.yml` change the encryption to `true` of the protocols you want to use SSL on.
+
+#### Nginx
+
+Two build arguments are available on the `nginx` section present in the `docker-compose.yml` file, `SECURE` and `API_SECURE`, which can be used to set whether the nginx server should use SSL, and whether the API should be accessed through SSL.

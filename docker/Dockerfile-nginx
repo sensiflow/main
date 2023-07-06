@@ -1,0 +1,12 @@
+FROM nginx:latest
+
+ARG SECURE=false
+ARG API_SECURE=false
+
+COPY ./nginx /nginx-files
+
+EXPOSE 80
+EXPOSE 443
+
+RUN ["sh","-c", "/nginx-files/install.sh $SECURE $API_SECURE"]
+

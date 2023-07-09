@@ -8,9 +8,9 @@ cd sensi-web
 
 call npm run build
 
-mkdir ..\sensi-web-api\src\main\resources\static\
-Xcopy /E /I /Y dist\* ..\sensi-web-api\src\main\resources\static\
-Xcopy /E /I /Y public\* ..\sensi-web-api\src\main\resources\static\
+mkdir ..\nginx\static\
+Xcopy /E /I /Y dist\* ..\nginx\static\
+Xcopy /E /I /Y public\* ..\nginx\static\
 
 cd ..
 

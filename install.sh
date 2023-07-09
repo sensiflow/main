@@ -9,8 +9,8 @@ cd sensi-web
 npm run build
 
 mkdir -p ../sensi-web-api/src/main/resources/static/
-cp -r dist/* ../sensi-web-api/src/main/resources/static/
-cp -r public/* ../sensi-web-api/src/main/resources/static/
+cp -r dist/* ../nginx/static/
+cp -r public/* ../nginx/static/
 
 echo "Booting web-api jar"
 

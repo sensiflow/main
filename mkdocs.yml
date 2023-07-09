@@ -39,7 +39,6 @@ nav:
       - Device:
           - Managing devices: api/device/general.md
           - Stream processing: api/device/control-media-processing.md
-          - Processed Stream: api/device/processed-stream.md
       - Device Group:
           - Managing device groups: api/device-group/general.md
       - User:

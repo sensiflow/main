@@ -33,6 +33,7 @@ Content-Type: application/json
       "description": "This is device 1",
       "streamURL": "rtsp://my-stream:5412/1",
       "processingState": "ACTIVE",
+      "processedStreamURL": "rtsp://my-stream.com:5412/2/detected",
       "userID": 0,
       "deviceGroupsID": []
     },
@@ -42,6 +43,7 @@ Content-Type: application/json
       "description": "This is device 2",
       "streamURL": "rtsp://my-stream:5412/2",
       "processingState": "INACTIVE",
+      "processedStreamURL": "rtsp://my-stream.com:5412/2/detected",
       "userID": 0,
       "deviceGroupsID": []
     }
@@ -68,8 +70,9 @@ Content-Type: application/json
   "id": 1,
   "name": "Device 1",
   "description": "This is device 1",
-  "streamURL": "rtsp://my-stream:5412/1",
+  "streamURL": "rtsp://my-stream.com:5412/1",
   "processingState": "PAUSED",
+  "processedStreamURL": "rtsp://my-stream.com:5412/1/detected",
   "userID": 1,
   "deviceGroupsID": []
 },

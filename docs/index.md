@@ -12,6 +12,10 @@ Our system is built on top of the following open-source technologies:
 
 ::cards::
 
+- title: Kotlin
+  content: Used to build the web API
+  url: https://kotlinlang.org/
+
 - title: Docker
   content: Used for containerization of the application
   url: https://www.docker.com/
@@ -32,12 +36,8 @@ Our system is built on top of the following open-source technologies:
   content: Used as the message broker for the detection system pipeline
   url: https://www.rabbitmq.com/
 
-- title: OpenCV
-  content: Brief description of OpenCV goes here
-  url: https://opencv.org/
-
 - title: YOLOv5
-  content: Used as the base machine learning model for object and person detection
+  content: Used as the machine learning algorithm for object and person detection
   url: https://github.com/ultralytics/yolov5
 
 - title: Python
@@ -45,7 +45,7 @@ Our system is built on top of the following open-source technologies:
   url: https://www.python.org/
 
 - title: MediaMTX
-  content: Used as the streaming server
+  content: Used as the media server
   url: https://github.com/aler9/mediamtx
 
 ::/cards::

@@ -1,6 +1,6 @@
 git clone https://github.com/sensiflow/sensi-web-api
 git clone https://github.com/sensiflow/sensi-web
-git clone https://github.com/sensiflow/image-processor
+git clone https://github.com/sensiflow/instance-manager
 
 echo "Building webApp distribution"
 

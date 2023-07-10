@@ -44,7 +44,7 @@
         {
             "name": "instance_ctl_exchange",
             "vhost": "/",
-            "type": "direct",
+            "type": "topic",
             "durable": true,
             "auto_delete": false,
             "internal": false,

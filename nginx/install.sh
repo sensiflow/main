@@ -24,3 +24,4 @@ else
     echo "Using api without ssl"
     #Do nothing as this is the default
 fi
+

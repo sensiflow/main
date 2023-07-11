@@ -47,16 +47,16 @@ Example GET /devices?page=1&size=10
       "name": "Cafeteria Device",
       "description": "This device is located in second floor of the cafeteria",
       "stream": "rtsp://my-stream:5412/1",
+      "processedStreamURL": "rtsp://my-stream:5412/1/detected",
       "status": "ONLINE",
-      "user": 1
     },
     {
       "id": 2,
       "name": "Entrance Device",
       "description": "This device is located at the entrance of the building",
       "stream": "rtsp://my-stream:5412/2",
+      "processedStreamURL": "rtsp://my-stream:5412/2/detected",
       "status": "OFFLINE",
-      "user": 1
     }
   ]
 }
@@ -66,52 +66,75 @@ Example GET /devices?page=1&size=10
 
 Many objects allow you to request additional information as an expanded response by using the `expand` request parameter.
 
-
-| Parameter | Type | Description | Required | Default |
-|-----------|------|-------------| -------- | ------- |
-| expanded | boolean | Expand the response to include additional information. | No | false |
-
+| Parameter | Type    | Description                                            | Required | Default |
+| --------- | ------- | ------------------------------------------------------ | -------- | ------- |
+| expanded  | boolean | Expand the response to include additional information. | No       | false   |
 
 This allows you to request additional information about the object in the response, without having to make additional requests.
 
 ???+ example "Expand example"
 
-    In the following example, we are requesting the device with id 1. We are not specifying the `expand` parameter, so the response will only include the entity id for the user. If we specify `expand=true`, the response will include the full user entity.
+    In the given example, our request is for a device group with an ID of 1. However, since we haven't provided the expand parameter, the response will solely consist of the group's metadata. To obtain additional information about the group, such as the devices associated with it, we can include expand=true in our request.
 
-    ```json linenums="1 3" hl_lines="20 9"
+    ```json linenums="1 3" hl_lines="9 32"
 
-    GET /devices/1
-
-    {
-        "id": 1,
-        "name": "Cafeteria Device",
-        "description": "This device is located in second floor of the cafeteria",
-        "stream": "rtsp://my-stream:5412/1",
-        "status": "ONLINE",
-        "user": 1
-    }
-
-    GET /devices/1?expand=true
+    GET /groups?page=1&size=2&expanded=false
+    Content-Type: application/json
 
     {
-        "id": 1,
-        "name": "Cafeteria Device",
-        "description": "This device is located in second floor of the cafeteria",
-        "stream": "rtsp://my-stream:5412/1",
-        "status": "ONLINE",
-        "user": {
-          "id": 1,
-          "firstName": "John",
-          "lastName": "Doe"
-        }
+        "totalElements": 1,
+        "totalPages": 1,
+        "isLast": true,
+        "isFirst": true,
+        "items": [
+            {
+                "id": 1,
+                "name": "Group 1",
+                "description": "Group 1 description"
+            }
+        ]
     }
 
+
+    GET /groups?page=1&size=2&expanded=true
+    Content-Type: application/json
+
+    {
+        "totalElements": 1,
+        "totalPages": 1,
+        "isLast": true,
+        "isFirst": true,
+        "items": [
+            {
+                "id": 1,
+                "name": "Group 1",
+                "description": "Group 1 description",
+                "devices": {
+                    "totalElements": 1,
+                    "totalPages": 1,
+                    "isLast": true,
+                    "isFirst": true,
+                    "items": [
+                      {
+                        "id": 1,
+                        "name": "Device 1",
+                        "description": "This is device 1",
+                        "streamURL": "rtsp://my-stream:5412/1",
+                        "processingState": "ACTIVE",
+                        "processedStreamURL": "rtsp://my-stream:5412/1/detected",
+                        "userID": 0,
+                        "deviceGroupsID": [1]
+                      }
+                    ]
+                }
+            }
+        ]
+    }
     ```
 
 ## Camera Stream Support
 
 Currently, SensiFlow supports only RTSP streams. We are working on adding support for RTMP and HLS streams.
 
-*[RTSP]: Real-Time Streaming Protocol
-*[HLS]: Http Live Streaming
-*[RTMP]: Real-Time Messaging Protocol
+_[RTSP]: Real-Time Streaming Protocol
+_[HLS]: Http Live Streaming \*[RTMP]: Real-Time Messaging Protocol

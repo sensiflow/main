@@ -33,6 +33,7 @@ Content-Type: application/json
       "description": "This is device 1",
       "streamURL": "rtsp://my-stream:5412/1",
       "processingState": "ACTIVE",
+      "processedStreamURL": "rtsp://my-stream.com:5412/2/detected",
       "userID": 0,
       "deviceGroupsID": []
     },
@@ -42,6 +43,7 @@ Content-Type: application/json
       "description": "This is device 2",
       "streamURL": "rtsp://my-stream:5412/2",
       "processingState": "INACTIVE",
+      "processedStreamURL": "rtsp://my-stream.com:5412/2/detected",
       "userID": 0,
       "deviceGroupsID": []
     }
@@ -68,8 +70,9 @@ Content-Type: application/json
   "id": 1,
   "name": "Device 1",
   "description": "This is device 1",
-  "streamURL": "rtsp://my-stream:5412/1",
+  "streamURL": "rtsp://my-stream.com:5412/1",
   "processingState": "PAUSED",
+  "processedStreamURL": "rtsp://my-stream.com:5412/1/detected",
   "userID": 1,
   "deviceGroupsID": []
 },
@@ -99,12 +102,11 @@ Creates a new device.
 
 ### Request Body
 
-| Parameter   | Type   | Description| required | max length |
-|-------------|--------|------------| -------- | ---------- |
-| name        | string | device's name | yes | 20 |
-| description | string | device's description  | no | 100 |
-| streamURL    | string | _RTSP_ Url where the device's feed is being transmitted  | yes | 200 |
-
+| Parameter   | Type   | Description                                             | required | max length |
+| ----------- | ------ | ------------------------------------------------------- | -------- | ---------- |
+| name        | string | device's name                                           | yes      | 20         |
+| description | string | device's description                                    | no       | 100        |
+| streamURL   | string | _RTSP_ Url where the device's feed is being transmitted | yes      | 200        |
 
 ### Response
 
@@ -143,11 +145,11 @@ Updates an existing device details with a given ID.
 
 ### Request Body
 
-| Parameter   | Type   | Description| required | max length |
-|-------------|--------|------------| -------- | ---------- |
-| name        | string | device's name | no | 20 |
-| description | string | device's description  | no | 100 |
-| streamURL    | string | _RTSP_ Url where the device's feed is being transmitted  | no | 200 |
+| Parameter   | Type   | Description                                             | required | max length |
+| ----------- | ------ | ------------------------------------------------------- | -------- | ---------- |
+| name        | string | device's name                                           | no       | 20         |
+| description | string | device's description                                    | no       | 100        |
+| streamURL   | string | _RTSP_ Url where the device's feed is being transmitted | no       | 200        |
 
 !!! warning
 
@@ -220,6 +222,17 @@ Returns the statistics of a device with a given ID.
 
 Supports [**Pagination**](/api/reference#pagination)
 
+## Query Parameters
+
+| Parameter | Type   | Description                                  | required | format              |
+| --------- | ------ | -------------------------------------------- | -------- | ------------------- |
+| from      | number | only return statistics after this timestamp  | no       | YYYY-MM-DDTHH:mm:ss |
+| to        | number | only return statistics before this timestamp | no       | YYYY-MM-DDTHH:mm:ss |
+
+Both `from` and `to` parameters are optional. If only `from` is provided, the statistics will be returned from the given timestamp until the current time. If only `to` is provided, the statistics will be returned from the beginning of time until the given timestamp. If both `from` and `to` are provided, the statistics will be returned from the given `from` timestamp until the given `to` timestamp as a closed interval.
+
+The metrics are retrieved in descending order. Meaning that the first page will contain the most recent metrics.
+
 ### Response
 
 - `200 OK` - success
@@ -252,7 +265,6 @@ Content-Type: application/json
 ```
 
 - `404 Not Found` if device with the given ID doesn't exist
-
 
 ```json
 

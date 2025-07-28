@@ -1,1 +1,33 @@
 broker_data
+
+# Cloned repositories (managed by hub scripts)
+sensi-web-api/
+sensi-web/
+instance-manager/
+
+# Build artifacts and temporary files
+nginx/static/
+*/dist/
+*/build/
+*/node_modules/
+*/.gradle/
+
+# SSL certificates (should not be committed)
+server.crt
+server.key
+server.p12
+
+# Backup directories
+*backup*/
+sensiflow-backup-*/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

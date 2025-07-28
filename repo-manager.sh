@@ -399,7 +399,7 @@ validate_repos() {
         if repo_exists "$repo"; then
             cd "$repo"
             
-            if git fsck --quiet; then
+            if git fsck >/dev/null 2>&1; then
                 log_success "$repo: Repository integrity OK"
             else
                 log_error "$repo: Repository integrity issues found"

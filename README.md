@@ -1,6 +1,6 @@
-# Sensiflow Main Repository
+# Sensiflow Main Repository - Project Hub
 
-This repository contains the documentation and configuration files for the Sensiflow system and respective services.
+This repository serves as the central hub for the Sensiflow system, containing documentation, configuration files, and management scripts for all Sensiflow organization projects.
 
 ## Repository Structure
 
@@ -11,63 +11,319 @@ The repository is structured as follows:
 - `project-docs/`: Contains the reports and presentation files for the Sensiflow project.
 - `rabbit-init`: Contains the RabbitMQ configuration files.
 - `sql`: Contains the SQL scripts for the postgres database.
+- **`hub-manager.sh/bat`**: Main hub management script for cloning and building all projects.
+- **`deploy.sh`**: Advanced deployment script with multiple deployment scenarios.
+- **`repo-manager.sh`**: Repository management script for maintaining all repositories.
+- **`hub-config.env`**: Configuration file for customizing hub behavior.
 
-## Run project from this repository
+## Sensiflow Organization Projects
 
-Before running the project, make sure you have [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/), [JDK 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html) and [npm 9.1.1+](https://nodejs.org/en/download/) installed on your machine.
+This hub manages the following repositories:
 
-The first step is to clone this repository:
+- **sensiflow/main** - Central hub repository (this repository)
+- **sensiflow/sensi-web-api** - Kotlin-based REST API backend
+- **sensiflow/sensi-web** - TypeScript/React frontend application
+- **sensiflow/instance-manager** - Python-based image processing service
+
+## Quick Start
+
+### Prerequisites
+
+Before running the project, make sure you have the following installed:
+- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+- [JDK 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html)
+- [Node.js and npm 9.1.1+](https://nodejs.org/en/download/)
+- [Git](https://git-scm.com/downloads)
+
+### Setup and Deployment
+
+1. **Clone this hub repository:**
+   ```bash
+   git clone https://github.com/sensiflow/main.git
+   cd main
+   ```
+
+2. **Clone and build all projects:**
+   ```bash
+   # Linux/macOS/WSL
+   ./hub-manager.sh clone
+   ./hub-manager.sh build
+   
+   # Windows
+   hub-manager.bat clone
+   hub-manager.bat build
+   ```
+
+3. **Deploy the complete stack:**
+   ```bash
+   # Simple deployment
+   ./deploy.sh full
+   
+   # Or use the hub manager
+   ./hub-manager.sh deploy
+   ```
+
+## Hub Management Commands
+
+### Hub Manager (`hub-manager.sh`)
+
+The main management script for all Sensiflow projects:
 
 ```bash
-git clone https://github.com/sensiflow/main.git
+# Clone all repositories
+./hub-manager.sh clone [--force]
+
+# Update all repositories
+./hub-manager.sh update
+
+# Build all projects
+./hub-manager.sh build
+
+# Deploy complete stack
+./hub-manager.sh deploy [--no-build]
+
+# Deploy test environment
+./hub-manager.sh deploy-test
+
+# Clean built artifacts
+./hub-manager.sh clean
+
+# Show repository status
+./hub-manager.sh status
 ```
 
-Next, navigate to the root of the repository:
+### Deployment Manager (`deploy.sh`)
+
+Advanced deployment with multiple scenarios:
 
 ```bash
-cd main
+# Deploy complete stack
+./deploy.sh full
+
+# Deploy only web components
+./deploy.sh web-only
+
+# Deploy only API and dependencies
+./deploy.sh api-only
+
+# Deploy only infrastructure services
+./deploy.sh infrastructure
+
+# Deploy development environment
+./deploy.sh dev
+
+# Deploy production with SSL
+./deploy.sh production
+
+# Additional options
+./deploy.sh full --no-build --logs --health
+./deploy.sh full --scale web-api=2
 ```
 
-Finally, run the following command to install the project
+### Repository Manager (`repo-manager.sh`)
 
-Linux/MaxOS/Wsl:
+Advanced repository management:
 
 ```bash
+# Sync all repositories
+./repo-manager.sh sync
+
+# Show detailed status
+./repo-manager.sh status
+
+# List branches across repositories
+./repo-manager.sh branches
+
+# Show latest commits
+./repo-manager.sh commits
+
+# Create backup
+./repo-manager.sh backup --backup-dir /path/to/backup
+
+# Clean repositories
+./repo-manager.sh clean --force
+
+# Validate repository integrity
+./repo-manager.sh validate
+```
+
+## Legacy Installation (Deprecated)
+
+The original installation scripts are still available but deprecated:
+
+```bash
+# Linux/macOS/WSL
 ./install.sh
-```
 
-Windows:
-
-```bash
+# Windows
 ./install.bat
 ```
 
-To run the web application, run the following command:
+
+## Service Access
+
+After deployment, the following services will be available:
+
+| Service | URL | Description |
+|---------|-----|-------------|
+| Web Application | http://localhost | Main Sensiflow web interface |
+| API Documentation | http://localhost/swagger-ui.html | REST API documentation |
+| Database Admin | http://localhost:8081 | Adminer database management |
+| RabbitMQ Management | http://localhost:15672 | Message broker management |
+| Media Server RTSP | rtsp://localhost:8554 | Real-time streaming protocol |
+| Media Server WebRTC | http://localhost:8889 | WebRTC streaming interface |
+
+## Configuration
+
+### Environment Configuration
+
+The hub behavior can be customized by editing `hub-config.env`:
 
 ```bash
-docker-compose up --build -d
+# Organization settings
+ORG_NAME=sensiflow
+GITHUB_BASE_URL=https://github.com/${ORG_NAME}
+
+# Repository list
+REPOS="sensi-web-api sensi-web instance-manager"
+
+# Build settings
+WEB_BUILD_COMMAND="npm run build"
+API_BUILD_COMMAND="./gradlew bootJar"
+
+# Deployment options
+DEFAULT_BUILD_BEFORE_DEPLOY=true
+DEFAULT_FORCE_CLONE=false
 ```
 
-To run the instance manager and scheduler please refer to the [Image Processor installation guide](https://sensiflow.github.io/main/contributing/image-processor/).
+### SSL Configuration
 
+For production deployment with SSL, place the following files in the repository root:
+- `server.crt` - SSL certificate
+- `server.key` - SSL private key  
+- `server.p12` - Java keystore for API (with password set via `KEY_STORE_PASSWORD` environment variable)
 
-### Use of SSL
+### Docker Compose Files
 
-The use of SSL is possible in the media server, API and nginx.
+- `docker-compose.yml` - Production deployment configuration
+- `docker-compose.test.yml` - Development/testing configuration
 
-To use SSL, you must have a valid certificate and key file, and place them in the root directory folder.
-These files must be named `server.crt` and `server.key` respectively.
+## Advanced Usage
 
-#### API
-To use SLL in the API a keystore file must be provided in the root directory folder, named `server.p12`.
-Its password can be set as an environment variable `KEY_STORE_PASSWORD` in the `web-api` section present in the `docker-compose.yml` file.
+### Individual Service Management
 
-After that, the `SECURE` environment variable must be set to `true` in the `web-api` section present in the `docker-compose.yml` file.
+You can manage individual repositories:
 
-#### Media Server
+```bash
+# Work with specific repository
+./repo-manager.sh status --repo sensi-web
+./repo-manager.sh sync --repo sensi-web-api
 
-On the media server config at `media-server-config/mediamtx.yml` change the encryption to `true` of the protocols you want to use SSL on.
+# Work with specific branch
+./repo-manager.sh sync --branch develop
+./repo-manager.sh branches --branch feature/new-ui
+```
 
-#### Nginx
+### Deployment Scenarios
 
-Two build arguments are available on the `nginx` section present in the `docker-compose.yml` file, `SECURE` and `API_SECURE`, which can be used to set whether the nginx server should use SSL, and whether the API should be accessed through SSL.
+```bash
+# Development workflow
+./hub-manager.sh clone
+./deploy.sh dev --logs
+
+# Production workflow
+./hub-manager.sh clone
+./hub-manager.sh build
+./deploy.sh production --health
+
+# Scaling services
+./deploy.sh full --scale web-api=2 --scale nginx=2
+
+# Quick restart with new changes
+./deploy.sh web-only --recreate
+```
+
+### Maintenance Tasks
+
+```bash
+# Create backup before major changes
+./repo-manager.sh backup --backup-dir /safe/location
+
+# Clean and rebuild everything
+./hub-manager.sh clean
+./hub-manager.sh build
+
+# Validate repository integrity
+./repo-manager.sh validate
+
+# Reset to clean state if needed
+./repo-manager.sh reset --force
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Docker not running:**
+   ```bash
+   # Check Docker status
+   docker info
+   
+   # Start Docker service (Linux)
+   sudo systemctl start docker
+   ```
+
+2. **Port conflicts:**
+   ```bash
+   # Check which processes are using ports
+   netstat -tulpn | grep :80
+   netstat -tulpn | grep :8081
+   
+   # Stop conflicting services or modify port mappings in docker-compose.yml
+   ```
+
+3. **Build failures:**
+   ```bash
+   # Clean and rebuild
+   ./hub-manager.sh clean
+   ./hub-manager.sh build
+   
+   # Check individual repository status
+   ./repo-manager.sh status
+   ```
+
+4. **Permission issues (Linux/macOS):**
+   ```bash
+   # Make scripts executable
+   chmod +x *.sh
+   
+   # Fix Docker permissions
+   sudo usermod -aG docker $USER
+   # Log out and log back in
+   ```
+
+### Getting Help
+
+- Check service logs: `docker compose logs <service-name>`
+- View all logs: `./deploy.sh full --logs`
+- Check service health: `./deploy.sh full --health`
+- Validate repositories: `./repo-manager.sh validate`
+
+## Development
+
+### Contributing to the Hub
+
+1. Fork this repository
+2. Create a feature branch
+3. Make your changes to the hub scripts
+4. Test with your changes
+5. Submit a pull request
+
+### Adding New Repositories
+
+To add new repositories to the hub management:
+
+1. Update `REPOS` in `hub-config.env`
+2. Add build instructions to the build functions in scripts if needed
+3. Update Docker Compose files if the new service needs orchestration
+4. Update this README documentation
